@@ -108,5 +108,26 @@
         createCalendar(calendar, 2023, 3);
     });
 </script>
+
+<button id="Task4" style="position: absolute; top: 400px; left: 10px;">Задание 4 - Изменение объекта</button>
+<!-- Три элемента div с идентификаторами «block1», «block2» и «block3».
+ Функция setTimeout(), ожидает 80 миллисекунд, прежде чем выбрать случайный блок
+  и устанавлиявает для его innerHTML значение «Hello World!».-->
+<div id="block1" style="width: 100px; height: 100px; background-color: red; display: none; margin-top: 40px;"></div>
+<div id="block2" style="width: 100px; height: 100px; background-color: blue; display: none; margin-top: 40px;"></div>
+<div id="block3" style="width: 100px; height: 100px; background-color: green; display: none; margin-top: 40px;"></div>
+
+<script>
+    document.getElementById("Task4").addEventListener("click", function() {
+        document.getElementById("block1").style.display = "inline-block";
+        document.getElementById("block2").style.display = "inline-block";
+        document.getElementById("block3").style.display = "inline-block";
+        setTimeout(function() {
+            var blocks = document.querySelectorAll("div[id^='block']");
+            var index = Math.floor(Math.random() * blocks.length);
+            blocks[index].innerHTML = "Hello World!";
+        }, 80);
+    });
+</script>
 </body>
 </html>
