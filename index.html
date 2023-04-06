@@ -2,22 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Laboratory work JavaScript</title>
-    <script>
-        function toggleContent() {
-            var x = document.getElementById("myContent");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
+    <title>Laboratory works JavaScript</title>
 
-        }
-    </script>
+
     <style>
         body {
             background-color: pink;
         }
+
         #date {
             position: absolute;
             bottom: 75%;
@@ -30,7 +22,59 @@
             left: 50%;
             transform: translateX(-50%);
         }
+        #parent {
+            display: flex;
+            margin-top: 20px;
+        }
+        .child {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
+        .red {
+            background-color: red;
+        }
+        .green {
+            background-color: green;
+        }
+        .blue {
+            background-color: blue;
+        }
+        .yellow {
+            background-color: yellow;
+        }
+        .purple {
+            background-color: purple;
+        }
+        .block {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            margin-top: 85px;
+            margin-right: 10px;
+            border: 1px solid black;
+            background-color: antiquewhite;
+        }
     </style>
+    <script>
+        function toggleContent() {
+            var x = document.getElementById("myContent");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+
+        }
+    </script>
+
+    <script>
+        function task3(str){
+            let DT3 = document.getElementById("DT3")
+            let count = document.getElementById(str).childElementCount;
+            DT3.innerHTML="Количество дочерних форм: "+count
+        }
+    </script>
 </head>
 
 <body>
@@ -59,6 +103,11 @@
         }
         updateTime();
         setInterval(updateTime, 1000);
+    </script>
+    <script>
+        function hide(elementId) {
+            document.getElementById(elementId).style.display = 'none';
+        }
     </script>
 </div>
 <button id="myButton" style="position: absolute; top: 200px; left: 7px;">Задание 2 - Календарь</button>
@@ -109,25 +158,58 @@
     });
 </script>
 
-<button id="Task4" style="position: absolute; top: 400px; left: 10px;">Задание 4 - Изменение объекта</button>
-<!-- Три элемента div с идентификаторами «block1», «block2» и «block3».
- Функция setTimeout(), ожидает 80 миллисекунд, прежде чем выбрать случайный блок
-  и устанавлиявает для его innerHTML значение «Hello World!».-->
-<div id="block1" style="width: 100px; height: 100px; background-color: red; display: none; margin-top: 40px;"></div>
-<div id="block2" style="width: 100px; height: 100px; background-color: blue; display: none; margin-top: 40px;"></div>
-<div id="block3" style="width: 100px; height: 100px; background-color: green; display: none; margin-top: 40px;"></div>
+<button onclick="createChildElements()" style="position: relative; top: 20px;">Задание 3 - Нахождение элементов в DOM-дереве</button>
+<div id="parent"></div>
+<p>Число пробельных узлов: <span id="whitespace"></span></p>
 
 <script>
-    document.getElementById("Task4").addEventListener("click", function() {
-        document.getElementById("block1").style.display = "inline-block";
-        document.getElementById("block2").style.display = "inline-block";
-        document.getElementById("block3").style.display = "inline-block";
-        setTimeout(function() {
-            var blocks = document.querySelectorAll("div[id^='block']");
-            var index = Math.floor(Math.random() * blocks.length);
-            blocks[index].innerHTML = "Hello World!";
-        }, 80);
+    function createChildElements() {
+        const parent = document.getElementById('parent');
+        const colors = ['red', 'green', 'blue', 'yellow', 'purple'];
+        const children = [];
+
+        for (let i = 0; i < colors.length; i++) {
+            const child = document.createElement('div');
+            child.style.backgroundColor = colors[i];
+            child.style.width = "50px";
+            child.style.height = "50px";
+            parent.appendChild(child);
+            children.push(child);
+        }
+
+        const whitespace = parent.childNodes.length - children.length;
+        document.getElementById('whitespace').textContent = whitespace;
+    }
+</script>
+
+
+<button id="Task4" style="position: relative; top: -275px; left: 0;">Задание 4 - Изменение объекта</button>
+<div id="block1" class="block"></div>
+<div id="block2" class="block"></div>
+<div id="block3" class="block"></div>
+<div id="block4" class="block"></div>
+<div id="block5" class="block"></div>
+
+<script>
+    const button = document.querySelector('#Task4');
+    const blocks = document.querySelectorAll('.block');
+    // button.addEventListener('click', () => {
+    //     setTimeout(() => {
+    //         const randomIndex = Math.floor(Math.random() * blocks.length);
+    //         const block = blocks[randomIndex];
+    //         block.innerHTML = '<img src="https://picsum.photos/200">';
+    //     }, 100);
+    // });
+    button.addEventListener('click', () => {
+        const randomIndex = Math.floor(Math.random() * blocks.length);
+        const block = blocks[randomIndex];
+
+        blocks.forEach((b) => {
+            b.innerHTML = '';
+        });
+        block.innerHTML = '<img src="https://picsum.photos/200">';
     });
+
 </script>
 </body>
 </html>
