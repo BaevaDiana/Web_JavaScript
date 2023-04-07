@@ -183,33 +183,31 @@
 </script>
 
 
-<button id="Task4" style="position: relative; top: -275px; left: 0;">Задание 4 - Изменение объекта</button>
-<div id="block1" class="block"></div>
-<div id="block2" class="block"></div>
-<div id="block3" class="block"></div>
-<div id="block4" class="block"></div>
-<div id="block5" class="block"></div>
+<button id="Task4" style="position: relative; top: 20px; left: 0;">Задание 4 - Изменение объекта</button>
+<div style="display: flex;">
+    <div id="block1" class="block"></div>
+    <div id="block2" class="block"></div>
+    <div id="block3" class="block"></div>
+    <div id="block4" class="block"></div>
+    <div id="block5" class="block"></div>
+</div>
 
 <script>
     const button = document.querySelector('#Task4');
     const blocks = document.querySelectorAll('.block');
-    // button.addEventListener('click', () => {
-    //     setTimeout(() => {
-    //         const randomIndex = Math.floor(Math.random() * blocks.length);
-    //         const block = blocks[randomIndex];
-    //         block.innerHTML = '<img src="https://picsum.photos/200">';
-    //     }, 100);
-    // });
+    blocks.forEach((b) => {
+        b.style.display = 'none';
+    });
     button.addEventListener('click', () => {
         const randomIndex = Math.floor(Math.random() * blocks.length);
         const block = blocks[randomIndex];
 
         blocks.forEach((b) => {
+            b.style.display = 'block';
             b.innerHTML = '';
         });
         block.innerHTML = '<img src="https://picsum.photos/200">';
     });
-
 </script>
 </body>
 </html>
