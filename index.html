@@ -10,6 +10,11 @@
             background-color: pink;
         }
 
+        button {
+            display: block;
+            margin-bottom: 10px;
+        }
+
         #date {
             position: absolute;
             bottom: 75%;
@@ -26,7 +31,7 @@
             display: flex;
             margin-top: 20px;
         }
-        .child {
+        #child {
             width: 100px;
             height: 100px;
             margin-right: 10px;
@@ -50,21 +55,21 @@
             display: inline-block;
             width: 200px;
             height: 200px;
-            margin-top: 85px;
             margin-right: 10px;
             border: 1px solid black;
             background-color: antiquewhite;
         }
     </style>
     <script>
-        function toggleContent() {
-            var x = document.getElementById("myContent");
+        function toggleContent(id) {
+            var x = document.getElementById(id);
             if (x.style.display === "none") {
                 x.style.display = "block";
+                x.style.marginTop = "10px";
             } else {
                 x.style.display = "none";
+                x.style.marginTop = "0";
             }
-
         }
     </script>
 
@@ -79,7 +84,8 @@
 
 <body>
 <h1>Задания по JS - Вариант 15</h1>
-<button onclick="toggleContent()">Задание 1 - Дата/время</button>
+
+<button onclick="toggleContent('myContent')">Задание 1 - Дата/время</button>
 <div id="myContent" style="display: none;">
     <div id="date"></div>
     <script>
@@ -110,8 +116,9 @@
         }
     </script>
 </div>
-<button id="myButton" style="position: absolute; top: 200px; left: 7px;">Задание 2 - Календарь</button>
-<div id="calendar" style="margin-top: 130px;"></div>
+
+<button onclick="toggleContent2('myCalendar')">Задание 2 - Календарь</button>
+<div id="myCalendar"></div>
 <script>
     function createCalendar(elem, year, month) {
         let mon = month - 1;
@@ -151,20 +158,26 @@
         if (day == 0) day = 7;
         return day - 1;
     }
-
-    document.getElementById("myButton").addEventListener("click", function() {
-        var calendar = document.getElementById('calendar');
-        createCalendar(calendar, 2023, 3);
-    });
+    function toggleContent2(id) {
+        var x = document.getElementById(id);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            x.style.marginTop = "10px";
+            createCalendar(document.getElementById('myCalendar'), 2023, 3);
+        } else {
+            x.style.display = "none";
+            x.style.marginTop = "0";
+        }
+    }
 </script>
 
-<button onclick="createChildElements()" style="position: relative; top: 20px;">Задание 3 - Нахождение элементов в DOM-дереве</button>
-<div id="parent"></div>
+<button onclick="toggleContent3('myElement')" style="position: relative;">Задание 3 - Нахождение элементов в DOM-дереве</button>
+<div id="myElement" style="display:none; display:flex;"></div>
 <p>Число пробельных узлов: <span id="whitespace"></span></p>
 
 <script>
     function createChildElements() {
-        const parent = document.getElementById('parent');
+        const parent = document.getElementById('myElement');
         const colors = ['red', 'green', 'blue', 'yellow', 'purple'];
         const children = [];
 
@@ -173,6 +186,7 @@
             child.style.backgroundColor = colors[i];
             child.style.width = "50px";
             child.style.height = "50px";
+            child.style.marginTop = "10px";
             parent.appendChild(child);
             children.push(child);
         }
@@ -180,10 +194,18 @@
         const whitespace = parent.childNodes.length - children.length;
         document.getElementById('whitespace').textContent = whitespace;
     }
+    function toggleContent3(id) {
+        var x = document.getElementById(id);
+        if (x.style.display === "none") {
+            x.style.display = "flex";
+            createChildElements();
+        } else {
+            x.style.display = "none";
+        }
+    }
 </script>
 
-
-<button id="Task4" style="position: relative; top: 20px; left: 0;">Задание 4 - Изменение объекта</button>
+<button id="Task4">Задание 4 - Изменение блока</button>
 <div style="display: flex;">
     <div id="block1" class="block"></div>
     <div id="block2" class="block"></div>
@@ -191,7 +213,6 @@
     <div id="block4" class="block"></div>
     <div id="block5" class="block"></div>
 </div>
-
 <script>
     const button = document.querySelector('#Task4');
     const blocks = document.querySelectorAll('.block');
@@ -199,15 +220,28 @@
         b.style.display = 'none';
     });
     button.addEventListener('click', () => {
-        const randomIndex = Math.floor(Math.random() * blocks.length);
-        const block = blocks[randomIndex];
-
         blocks.forEach((b) => {
             b.style.display = 'block';
             b.innerHTML = '';
         });
-        block.innerHTML = '<img src="https://picsum.photos/200">';
+        const intervalId = setInterval(() => {
+            const randomIndex = Math.floor(Math.random() * blocks.length);
+            const block = blocks[randomIndex];
+            block.innerHTML = '<img src="https://picsum.photos/200">';
+            setTimeout(() => {
+                block.innerHTML = '';
+            }, 100);
+        }, 100);
+        setTimeout(() => {
+            clearInterval(intervalId);
+            blocks.forEach((b) => {
+                b.style.display = 'none';
+                b.innerHTML = '';
+            });
+        }, 5000);
     });
 </script>
+
+
 </body>
 </html>
