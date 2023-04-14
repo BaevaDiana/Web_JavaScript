@@ -377,5 +377,66 @@
     });
 </script>
 
+<button onclick="toggleContent7(7)">Задание 7 - Меню</button>
+<div class="content" id="content7" style="display:none;">
+    <div class="menu cand">
+        <h3 class="title">СЛАДОСТИ</h3>
+        <ul id="list7">
+            <li>Печенье</li>
+            <li>Шоколад</li>
+            <li>Конфета</li>
+            <li>Леденец</li>
+        </ul>
+        <h3 id="end7">СЛАДОСТИ КОНЧИЛИСЬ</h3>
+    </div>
+</div>
+<script>
+    let endtext = document.getElementById("end7");
+    endtext.style.visibility = "hidden";
+
+    let menuElement = document.querySelector(".cand");
+    let titleElement = menuElement.querySelector(".title");
+
+    titleElement.onclick = function () {
+        menuElement.classList.toggle("hidden");
+    };
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const itemsList1 = document.getElementById("list7");
+
+        itemsList1.addEventListener("click", function (event) {
+            let target = event.target;
+            if (target.tagName === "LI") {
+                target.classList.add("fading");
+                setTimeout(() => {
+                    target.remove();
+                }, 100);
+            }
+
+            if (itemsList1.childElementCount == 1) {
+                setTimeout(()=>{
+                    endtext.style.visibility = "visible";
+                    endtext.classList.add("fading_out");
+                },120);
+            }
+        });
+    });
+
+    function toggleContent7(id) {
+        let content = document.getElementById("content" + id);
+        if (content.style.display === "none") {
+            content.style.display = "block";
+        } else {
+            content.style.display = "none";
+        }
+    }
+</script>
+
+
+
+
+
+
+
 </body>
 </html>
