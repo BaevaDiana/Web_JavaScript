@@ -242,6 +242,95 @@
     });
 </script>
 
+<button onclick="toggleContent5('myList')" style="position: relative;">Задание 5 - Создание элемента</button>
+<div id="myList" style="display:none;">
+    <h1>Список элементов</h1>
+    <ul>
+        <li>Элемент 1</li>
+        <li>
+            Элемент 2
+            <ul>
+                <li>Подэлемент 1</li>
+                <li>Подэлемент 2</li>
+                <li>Подэлемент 3</li>
+                <li>Подэлемент 4</li>
+                <li>Подэлемент 5</li>
+            </ul>
+        </li>
+        <li>Элемент 3</li>
+        <li>
+            Элемент 4
+            <ul>
+                <li>Подэлемент 1</li>
+                <li>Подэлемент 2</li>
+            </ul>
+        </li>
+        <li>Элемент 5</li>
+    </ul>
+    <button onclick="createLi()" style="font-size: 16px; background-color: #008CBA; color: white; padding: 10px 20px; border-radius: 8px;">Добавить элемент</button>
+    <button onclick="deleteLi()" style="font-size: 16px; background-color: #f44336; color: white; padding: 10px 20px; border-radius: 8px;">Удалить элемент</button>
+</div>
+
+<script>
+    const list = document.getElementById('myList');
+    let ul = document.querySelector('#myList ul');
+    let liCount = ul.children.length;
+
+    function createLi() {
+        let li = document.createElement('li');
+        let content = prompt('Введите содержимое пункта списка', '');
+        if (content === null) {
+            return;
+        }
+        li.textContent = content;
+        ul.appendChild(li);
+        li.onclick = function(event) {
+            if (event.target.tagName !== 'LI') {
+                return;
+            }
+            let result = confirm(`Вы уверены, что хотите удалить пункт списка "${event.target.textContent}"?`);
+            if (result) {
+                event.target.remove();
+            }
+        };
+        liCount++;
+    }
+
+    function deleteLi() {
+        let liList = ul.querySelectorAll('li');
+        if (liList.length === 0) {
+            alert('Список пуст!');
+            return;
+        }
+        let liToDelete = prompt(`Введите номер пункта списка (от 1 до ${liList.length})`, '');
+        if (liToDelete === null) {
+            return;
+        }
+        liToDelete = parseInt(liToDelete);
+        if (isNaN(liToDelete) || liToDelete <= 0 || liToDelete > liList.length) {
+            alert(`Некорректный номер пункта списка! Введите число от 1 до ${liList.length}.`);
+            return;
+        }
+        let result = confirm(`Вы уверены, что хотите удалить пункт списка "${liList[liToDelete - 1].textContent}"?`);
+        if (result) {
+            liList[liToDelete - 1].remove();
+            liCount--;
+        }
+    }
+
+    let listVisible = false;
+
+    function toggleContent5(id) {
+        var x = document.getElementById(id);
+        if (!listVisible) {
+            x.style.display = 'block';
+            listVisible = true;
+        } else {
+            x.style.display = 'none';
+            listVisible = false;
+        }
+    }
+</script>
 
 </body>
 </html>
