@@ -172,8 +172,9 @@
 </script>
 
 <button onclick="toggleContent3('myElement')" style="position: relative;">Задание 3 - Нахождение элементов в DOM-дереве</button>
-<div id="myElement" style="display:none; display:flex;"></div>
-<p>Число пробельных узлов: <span id="whitespace"></span></p>
+<div id="myElement" style="display:none;"></div>
+<p id="whitespace_text" style="display:none;">Число пробельных узлов:</p>
+<p><span id="whitespace"></span></p>
 
 <script>
     function createChildElements() {
@@ -199,8 +200,10 @@
         if (x.style.display === "none") {
             x.style.display = "flex";
             createChildElements();
+            document.getElementById('whitespace_text').style.display = "block";
         } else {
             x.style.display = "none";
+            document.getElementById('whitespace_text').style.display = "none";
         }
     }
 </script>
@@ -432,11 +435,56 @@
     }
 </script>
 
+<button onclick="toggleContent8()">Задание 8</button>
+<div id="container" style="display: none;">
+    <img id="myImage" src="https://picsum.photos/id/237/200/300" alt="">
+    <div id="text">Hello, JavaScript!</div>
+</div>
+<script>
+    function toggleContent8() {
+        const container = document.getElementById("container");
+        if (container.style.display === "none") {
+            container.style.display = "block";
+        } else {
+            container.style.display = "none";
+        }
 
+        var img = document.getElementById("myImage");
+        var text = document.getElementById("text");
 
+        img.addEventListener("mouseover", function () {
+            text.style.opacity = "0";
+            img.style.opacity = "0";
+            img.style.transition = "opacity 0.5s ease-in-out";
+        });
 
+        img.addEventListener("mouseout", function () {
+            text.style.opacity = "1";
+            img.style.opacity = "1";
+            img.style.transition = "opacity 0.5s ease-in-out";
+        });
 
-
+        img.addEventListener("transitionend", function () {
+            if (img.style.opacity === "0") {
+                text.style.opacity = "1";
+                text.style.position = "absolute";
+                text.style.top = img.offsetTop + "px";
+                text.style.left = img.offsetLeft + "px";
+                text.style.width = img.width + "px";
+                text.style.height = img.height + "px";
+                text.style.zIndex = "-1";
+            } else {
+                text.style.opacity = "0";
+                text.style.position = "";
+                text.style.top = "";
+                text.style.left = "";
+                text.style.width = "";
+                text.style.height = "";
+                text.style.zIndex = "";
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
