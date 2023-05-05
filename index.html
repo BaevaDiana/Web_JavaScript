@@ -82,14 +82,6 @@
             }
         }
     </script>
-
-    <script>
-        function task3(str){
-            let DT3 = document.getElementById("DT3")
-            let count = document.getElementById(str).childElementCount;
-            DT3.innerHTML="Количество дочерних форм: "+count
-        }
-    </script>
 </head>
 
 <body>
@@ -185,7 +177,6 @@
 <div id="myElement" style="display:none;"></div>
 <p id="whitespace_text" style="display:none;">Число пробельных узлов:</p>
 <p><span id="whitespace"></span></p>
-
 <script>
     function createChildElements() {
         const parent = document.getElementById('myElement');
@@ -283,7 +274,6 @@
     <button onclick="createLi()" style="font-size: 16px; background-color: #008CBA; color: white; padding: 10px 20px; border-radius: 8px;">Добавить элемент</button>
     <button onclick="deleteLi()" style="font-size: 16px; background-color: #f44336; color: white; padding: 10px 20px; border-radius: 8px;">Удалить элемент</button>
 </div>
-
 <script>
     const list = document.getElementById('myList');
     let ul = document.querySelector('#myList ul');
@@ -352,7 +342,6 @@
     <img id="MyImage3" src="https://picsum.photos/id/239/200/300" alt="">
     <img id="MyImage4" src="https://picsum.photos/id/240/200/300" alt="">
 </div>
-
 <script>
     function toggleContent6(id) {
         var x = document.getElementById(id);
@@ -769,13 +758,11 @@
 
 </script>
 
-
 <button onclick="toggleContent11('myGame')">Задание 11 - Игра JS</button>
 <div id="myGame" style="display:none;">
     <!-- Рисуем игровое поле -->
     <canvas width="750" height="585" id="game"></canvas>
 </div>
-
 <!-- Сам скрипт с игрой -->
 <script>
     // Обращаемся к игровому полю из документа
@@ -963,7 +950,6 @@
         }
     }
 </script>
-
 
 </body>
 </html>
